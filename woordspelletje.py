@@ -5,14 +5,14 @@ def KiesWoord(woorden):
     return woord
 
 def VraagLetter():
-    letter = input("Kies 1 letter\n")
+    letter = input("Kies 1 letter:\n")
     if len(letter) > 1:
         print("Je kan maar 1 letter tegelijk kiezen")
     else:
         return letter
 
 try:
-    with open("woorden_eenvoudig.txt", "r") as file:
+    with open("woorden.txt", "r") as file:
         content = file.read()
     woordenlijst = content.split('\n')
 except:
@@ -24,13 +24,12 @@ letters = list(woord)
 correctletters = []
 for x in range(len(letters)):
     correctletters.append("_")
-print(letters,"\n",correctletters)
 
 fouten = 0
 
 while True:
     if fouten >= 10:
-        print("Je hebt teveel fout geraden, start opnieuw.")
+        print(f"Je hebt teveel fout geraden, Je hebt geraden: {''.join(correctletters)}. Het woord was {woord}.")
         quit()
     else:
         letter = VraagLetter()
@@ -46,7 +45,8 @@ while True:
                     correctletters[x] = letter
                 else:
                     continue
-        print("".join(correctletters))
+        progress = "".join(correctletters)
+        print(f"woord: {progress}")
 
         if correctletters == list(woord):
             print("Je hebt het woord geraden!")
